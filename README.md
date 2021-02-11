@@ -7,17 +7,17 @@
 | nickname           | string     | null: false               |
 | email              | string     | null: false, unique: true |
 | encrypted_password | string     | null: false               |
-| firstname          | string     | null: false               |
-| lastname           | string     | null: false               |
-| firstname_reading  | string     | null: false               |
-| lastname_reading   | string     | null: false               |
+| first_name         | string     | null: false               |
+| last_name          | string     | null: false               |
+| first_name_reading | string     | null: false               |
+| last_name_reading  | string     | null: false               |
 | birthday           | date       | null: false               |
 
 
 ### Association
 
 - has_many :items
-- has_many :coments
+- has_many :comments
 - has_many :buyers
 
 ## items テーブル
@@ -31,7 +31,7 @@
 | delivery_fee_id    | integer    | null: false                    |
 | delivery_source_id | integer    | null: false                    |
 | delivery_days_id   | integer    | null: false                    |
-| value              | integer    | null: false                    |
+| price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 
