@@ -18,7 +18,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :buyers
+- has_many :orders
 
 ## items テーブル
 
