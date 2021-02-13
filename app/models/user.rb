@@ -14,11 +14,11 @@ class User < ApplicationRecord
           # emailは必須、一意性で、＠を含まなければいけない事
           validates :email, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "is invalid. Input '@'." }
           # passwordは必須、６文字以上で、半角英数字の混合である事
-          validates :encrypted_password, format: { with: /\A[a-z\d]{6,100}+\z/i, message: "is invalid. Input half-width both characters & numbers." }
+          validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])\w{6,100}\z/, message: "is invalid. Input half-width both characters & numbers." }
           # 名前は必須である事
-          validates :first_name
+          validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥々]/, message: "is invalid. Input full-width characters." }
           # 苗字は必須である事
-          validates :last_name
+          validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥々]/, message: "is invalid. Input full-width characters." }
           # 名前の読み仮名は必須で、全角カタカナである事
           validates :first_name_reading, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters." }
           # 苗字の読み仮名は必須で、全角カタカナである事
