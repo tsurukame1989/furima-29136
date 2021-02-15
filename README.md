@@ -24,8 +24,8 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| name 　　　         | string     | null: false                    |
-| info　　　          | text       | null: false                    |
+| name               | string     | null: false                    |
+| info               | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
 | delivery_fee_id    | integer    | null: false                    |
