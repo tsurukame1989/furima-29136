@@ -3,6 +3,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :order
 
+  # Active_hash Categoryモデルのアソシエーション
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+
   with_options presence: true do
     # 商品名が必須であること
     validates :name
