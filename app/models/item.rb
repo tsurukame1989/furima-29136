@@ -7,8 +7,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
-  belongs_to :delivery_fee
-  belongs_to :delivery_source
+  belongs_to :Delivery_fee
 
   with_options presence: true do
     # 商品名が必須であること
