@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :Delivery_fee
   belongs_to :delivery_source
+  belongs_to :delivery_days
 
   with_options presence: true do
     # 商品名が必須であること
