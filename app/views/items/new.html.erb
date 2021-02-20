@@ -9,6 +9,7 @@
 
     <%# エラーメッセージ表示の部分テンプレート %>
     <%= render "shared/error_messages", model: f.object %>
+    <%# /エラーメッセージ表示の部分テンプレート %>
   
     <%# 出品画像 %>
     <div class="img-upload">
@@ -20,7 +21,7 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :hoge, id:"item-image" %>
+        <%= f.file_field :image, id:"item-image" %>
       </div>
     </div>
     <%# /出品画像 %>
