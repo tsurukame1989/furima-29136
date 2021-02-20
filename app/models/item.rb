@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   has_many :comments
   belongs_to :user
   has_one :order
+  has_one_attached :image
 
   # Active_hash モデルのアソシエーション
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -10,6 +11,9 @@ class Item < ApplicationRecord
   belongs_to :Delivery_fee
   belongs_to :delivery_source
   belongs_to :delivery_days
+
+  # 画像が必須であること
+  validate :image_presence
 
   with_options presence: true do
     # 商品名が必須であること
@@ -35,7 +39,15 @@ class Item < ApplicationRecord
                 # 販売価格は半角数字のみ保存可能であること
                 format: { with: /\A[0-9]+\z/, message: "is invalid. Input half_with numbers." }
     end
-
   end
+
+  private
+  # カスタムバリデーション
+  def image_presence
+    unless image.attached?
+      errors.add(:image, "Is invalid. Must attach some file.")
+    end
+  end
+
 end
 
