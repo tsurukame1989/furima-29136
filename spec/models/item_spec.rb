@@ -74,27 +74,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Info is too long (maximum is 1000 characters)")
       end
       it 'category_idが初期の1が選択されてる場合は出品できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category is invalid. must select.")
       end
       it 'condition_idが初期の1が選択されてる場合は出品できない' do
-        @item.condition_id = '1'
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition is invalid. must select.")
       end
       it 'delivery_fee_idが初期の1が選択されてる場合は出品できない' do
-        @item.delivery_fee_id = '1'
+        @item.delivery_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee is invalid. must select.")
       end
       it 'delivery_source_idが初期の1が選択されてる場合は出品できない' do
-        @item.delivery_source_id = '1'
+        @item.delivery_source_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery source is invalid. must select.")
       end
       it 'delivery_days_idが初期の1が選択されてる場合は出品できない' do
-        @item.delivery_days_id = '1'
+        @item.delivery_days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery days is invalid. must select.")
       end
@@ -104,12 +104,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceの値が300以下では出品できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half_with 300 ~ 9999999 numbers.")
       end
       it 'priceの値が9999999以上では出品できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid. Input half_with 300 ~ 9999999 numbers.")
       end
