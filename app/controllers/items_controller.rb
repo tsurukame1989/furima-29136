@@ -3,6 +3,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    # idの降順で表示
+    @items = Item.all.order(id: "DESC")
+    # ActiveHashのDeliveryFeeモデルの内容を、インスタンス@delivery_feeに代入
+    @delivery_fee = DeliveryFee.all
   end
 
   def new
