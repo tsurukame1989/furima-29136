@@ -7,6 +7,9 @@ class ItemsController < ApplicationController
     @items = Item.all.order(id: "DESC")
     # ActiveHashのDeliveryFeeモデルの内容を、インスタンス@delivery_feeに代入
     @delivery_fee = DeliveryFee.all
+    
+    # Order機能の実装後コメントアウト解除
+    # @orders = Order.all
   end
 
   def new
