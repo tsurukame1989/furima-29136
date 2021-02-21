@@ -16,10 +16,10 @@ class Item < ApplicationRecord
   validate :image_presence
 
   with_options presence: true do
-    # 商品名が必須であること
-    validates :name
-    # 商品の説明が必須であること
-    validates :info
+    # 商品名が必須で,40字以内であること
+    validates :name, length: { maximum: 40 }
+    # 商品の説明が必須で、1000字以内であること
+    validates :info, length: { maximum: 1000 }
 
     with_options numericality: { other_than: 1, message: "is invalid. must select."} do
       # カテゴリーの情報が必須であること
@@ -33,12 +33,12 @@ class Item < ApplicationRecord
       # 発送までの日数についての情報が必須であること
       validates :delivery_days_id
       # 価格についての情報が必須であること
-      validates :price, 
-                # 価格の範囲が¥300~¥9,999,999の間であること
-                numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to:9999999, message: "is invalid. Input 300 ~ 9999999 numbers." },
-                # 販売価格は半角数字のみ保存可能であること
-                format: { with: /\A[0-9]+\z/, message: "is invalid. Input half_with numbers." }
     end
+    validates :price, 
+                # 価格の範囲が¥300~¥9,999,999の間であること
+                numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to:9999999, message: "is invalid. Input half_with 300 ~ 9999999 numbers."},
+                # 販売価格は半角数字のみ保存可能であること
+                format: { with: /\A[0-9]+\z/,}
   end
 
   private
