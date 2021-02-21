@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
+  
+  # Basic認証のメソッド
   before_action :basic_auth
+
+  #dviseのストロングパラメーターを利用可能にするメソッド
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
