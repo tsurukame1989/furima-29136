@@ -126,37 +126,62 @@
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
 
-      <%# Itemモデルに記録されている商品データをeachメソッドで並べる %>
-      <% @items.each do |item| %>
-        <li class='list'>
-          <%= link_to "#" do %>
-            <div class='item-img-content'>
-              <%= image_tag item.image, class: "item-img" %>
+      <%# 条件分岐:@itemに商品データが存在するならtrue %>
+      <% if @items.present? %>
+        <%# Itemモデルに記録されている商品データをeachメソッドで並べる %>
+        <% @items.each do |item| %>
+        
+          <li class='list'>
+            <%= link_to "#" do %>
+              <div class='item-img-content'>
+                <%= image_tag item.image, class: "item-img" %>
 
-              <%# Order機能の実装後コメントアウト解除 %>
-              <%# 売れた商品のid(Orderモデルのitem_id)とItemモデルのidが一致した場合、Sold Outを表示 %>
-              <%# <% @orders.each do |order| %>
-                <%# <% if order.item_id == item.id %>
-                  <%# <div class='sold-out'> %>
-                  <%# <span>Sold Out!!</span> %>
-                  <%# </div> %>
+                <%# Order機能の実装後コメントアウト解除 %>
+                <%# 売れた商品のid(Orderモデルのitem_id)とItemモデルのidが一致した場合、Sold Outを表示 %>
+                <%# <% @orders.each do |order| %>
+                  <%# <% if order.item_id == item.id %>
+                    <%# <div class='sold-out'> %>
+                    <%# <span>Sold Out!!</span> %>
+                    <%# </div> %>
+                  <%# <% end %>
                 <%# <% end %>
-              <%# <% end %>
-              <%# //売れた商品のid(Orderモデルのitem_id)とItemモデルのidが一致した場合、Sold Outを表示 %>
-              <%# //Order機能の実装後コメントアウト解除 %>
+                <%# //売れた商品のid(Orderモデルのitem_id)とItemモデルのidが一致した場合、Sold Outを表示 %>
+                <%# //Order機能の実装後コメントアウト解除 %>
 
-            </div>
+              </div>
+              <div class='item-info'>
+                <h3 class='item-name'>
+                  <%= item.name %>
+                </h3>
+                <div class='item-price'>
+                  <span>
+                    <%= item.price %>円<br>
+                    <%# アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
+                    <%= item.Delivery_fee.name %>
+                    <%# //アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
+                  </span>
+                  <div class='star-btn'>
+                    <%= image_tag "star.png", class:"star-icon" %>
+                    <span class='star-count'>0</span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+        <%# //Itemモデルに記録されている商品データをeachメソッドで並べる %>
+
+      <%# @itemに商品データがない場合はダミー商品を表示する %>
+      <% else %>
+        <li class='list'>
+          <%= link_to '#' do %>
+            <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
             <div class='item-info'>
               <h3 class='item-name'>
-                <%= item.name %>
+                商品を出品してね！
               </h3>
               <div class='item-price'>
-                <span>
-                  <%= item.price %>円<br>
-                  <%# アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
-                  <%= item.Delivery_fee.name %>
-                  <%# //アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
-                </span>
+                <span>99999999円<br>(税込み)</span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
@@ -166,30 +191,8 @@
           <% end %>
         </li>
       <% end %>
-
-      <%# 商品がある場合は表示されないダミー商品 %>
-      <%# Itemモデルにデータが存在するかの条件分岐 %>
-      <% if Item.nil? %>
-      <li class='list'>
-        <%= link_to '#' do %>
-         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
-          <div class='item-info'>
-            <h3 class='item-name'>
-              商品を出品してね！
-            </h3>
-            <div class='item-price'>
-             <span>99999999円<br>(税込み)</span>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </li>
-      <% end %>
-      <%# //Itemモデルにデータが存在するかの条件分岐 %>
-      <%# //商品がある場合は表示されないダミー商品 %>
+      <%# //@itemに商品データがない場合はダミー商品を表示する %>
+      <%# //条件分岐:@itemに商品データが存在するならtrue %>
     </ul>
   </div>
   <%# /商品一覧 %>
