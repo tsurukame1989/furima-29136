@@ -153,15 +153,9 @@
               <div class='item-price'>
                 <span>
                   <%= item.price %>円<br>
-
-                  <%# ActiveHashのDeliveryFeeモデルのidと、Itemモデルに記録されたdelivery_fee_idが一致した:nameを表示する %>
-                  <% @delivery_fee.each do |fee| %>
-                    <% if fee.id == item.delivery_fee_id %>
-                      <%= fee.name %>
-                    <% end %>
-                  <% end %>
-                  <%# //ActiveHashのDeliveryFeeモデルのidと、Itemモデルに記録されたdelivery_fee_idが一致した:nameを表示する %>
-
+                  <%# アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
+                  <%= item.Delivery_fee.name %>
+                  <%# //アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
                 </span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
