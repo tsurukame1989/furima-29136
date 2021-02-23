@@ -3,6 +3,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    # idの降順で表示
+    @items = Item.all.order(id: "DESC")
+
+    # Order機能の実装後コメントアウト解除
+    # @orders = Order.all
   end
 
   def new
