@@ -132,7 +132,8 @@
         <% @items.each do |item| %>
         
           <li class='list'>
-            <%= link_to "#" do %>
+            <%# 商品のidのshowページへのリンク %>
+            <%= link_to item_path(item.id), method: :get do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
 
@@ -157,7 +158,7 @@
                   <span>
                     <%= item.price %>円<br>
                     <%# アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
-                    <%= item.Delivery_fee.name %>
+                    <%= item.delivery_fee.name %>
                     <%# //アソシエーションを組んだActive_hash DeliveryFeeモデルから:nameを取り出す %>
                   </span>
                   <div class='star-btn'>
