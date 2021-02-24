@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # ログアウト状態のユーザーをログインページへ遷移させるメソッド
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     # idの降順で表示
