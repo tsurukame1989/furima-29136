@@ -17,8 +17,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.create(item_params)
     if @item.valid?
-      @item.save
-      redirect_to action: :index
+      save_redirect
     else
       render  action: :new
     end
@@ -32,9 +31,23 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.valid?
+      save_redirect
+    else
+      render  action: :edit
+    end
+  end
+
   private
   def item_params 
     params.require(:item).permit(:image, :name, :info, :category_id, :condition_id, :delivery_fee_id, :delivery_source_id, :delivery_days_id, :price ).merge(user_id: current_user.id)
   end
 end
 
+def save_redirect
+  @item.save
+  redirect_to action: :index
+end
