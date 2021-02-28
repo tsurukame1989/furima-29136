@@ -3,10 +3,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   # ＠itemに特定のIDのパラメーターを代入するメソッド（同じ記述を減らすために定義）
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   # 商品のuser.idと出品者のidが一致しない場合indexページへ遷移するメソッド
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     # idの降順で表示
@@ -43,6 +43,12 @@ class ItemsController < ApplicationController
       render action: :edit
     end
   end
+
+  def destroy
+    @item.destroy
+    redirect_to action: :index
+  end
+
 
   private
   def item_params 
