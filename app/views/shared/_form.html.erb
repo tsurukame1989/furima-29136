@@ -1,6 +1,6 @@
 <div class="items-sell-main">
-    <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
+  <h2 class="items-sell-title">商品の情報を入力</h2>
+  <%= form_with model: @item, local: true do |f| %>
 
     <%# エラーメッセージ表示の部分テンプレート %>
     <%= render "shared/error_messages", model: f.object %>
@@ -20,6 +20,7 @@
       </div>
     </div>
     <%# /出品画像 %>
+    
     <%# 商品名と商品説明 %>
     <div class="new-items">
       <div class="weight-bold-text">
@@ -145,5 +146,5 @@
       <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
-  </div>
-<% end %>
+  <% end %>
+</div>
