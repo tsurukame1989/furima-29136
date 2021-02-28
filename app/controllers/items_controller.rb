@@ -5,6 +5,9 @@ class ItemsController < ApplicationController
   # ＠itemに特定のIDのパラメーターを代入するメソッド（同じ記述を減らすために定義）
   before_action :set_item, only: [:show, :edit, :update]
 
+  # 商品のuser.idと出品者のidが一致しない場合indexページへ遷移するメソッド
+  before_action :move_to_index, only: [:edit, :update]
+
   def index
     # idの降順で表示
     @items = Item.all.order(id: "DESC")
@@ -30,9 +33,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user.id
-      redirect_to action: :index
-    end
   end
 
   def update
@@ -58,4 +58,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def move_to_index
+    unless current_user.id == @item.user.id
+      redirect_to action: :index
+    end
+  end
 end
