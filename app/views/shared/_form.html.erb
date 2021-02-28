@@ -3,9 +3,11 @@
   <%= form_with model: @item, local: true do |f| %>
 
     <%# エラーメッセージ表示の部分テンプレート %>
-    <%= render "shared/error_messages", model: f.object %>
+    <%= render "shared/error_messages" %>
     <%# /エラーメッセージ表示の部分テンプレート %>
   
+    
+
     <%# 出品画像 %>
     <div class="img-upload">
       <div class="weight-bold-text">

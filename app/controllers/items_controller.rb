@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
       @item.save
       redirect_to action: :index
     else
-      render action: :new
+      redirect_to new_item_path, flash: { error: @item.errors.full_messages }
     end
   end
 
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to action: :index
     else
-      render action: :edit
+      redirect_to edit_item_path, flash: { error: @item.errors.full_messages }
     end
   end
 
