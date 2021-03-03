@@ -17,6 +17,5 @@ class ShippingAddress < ApplicationRecord
     validates :house_number
     # 電話番号の情報が必須であり、ハイフンなしの半角数字で入力されていること
     validates :phone_number, format: { with: /\A\d{10}\z/, message: "is invalid. Input half-width numbers without hyphens." }
-    end
   end
 end
