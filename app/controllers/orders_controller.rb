@@ -2,8 +2,11 @@ class OrdersController < ApplicationController
   # ログアウト状態のユーザーをログインページへ遷移させるメソッド
   before_action :authenticate_user!
   
-  # ＠itemに特定のIDのパラメーターを代入するメソッド（同じ記述を減らすために定義）
+  # ＠itemにItemモデルの特定のIDのパラメーターを代入するメソッド（同じ記述を減らすために定義）
   before_action :set_item, only: [:index, :create]
+
+  # 出品者が直接購入ページにアクセスしようとするとトップページに遷移するメソッド
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @price = @item.price.to_s(:delimited)
@@ -27,6 +30,12 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    if current_user.id == @item.user.id
+      redirect_to root_path
+    end
   end
 
 end
