@@ -1,7 +1,7 @@
 class OrderShipping
 
   include ActiveModel::Model
-  atter_accesor :token, :postal_code, :delivery_source_id, :city, :house_number, :building_name, :phone_number
+  attr_accessor :token, :postal_code, :delivery_source_id, :city, :house_number, :building_name, :phone_number
 
   with_options presence: true do
     # クレジットカード情報（token)が必須であること
@@ -21,4 +21,5 @@ class OrderShipping
   def save
     ShippingAddress.create(postal_code: postal_code, delivery_source_id: delivery_source_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number)
     Order.cretae(token: token)
+  end
 end
