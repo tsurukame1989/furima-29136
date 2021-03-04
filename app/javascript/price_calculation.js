@@ -19,6 +19,6 @@ function priceCalculation() {
     // "id:profit"の値を3桁毎に区切って(inputPrice - taxPrice)に置換
     profit.innerHTML = (inputPrice - taxPrice).toLocaleString();
   })
-}
+
 
 window.addEventListener('load', priceCalculation);
