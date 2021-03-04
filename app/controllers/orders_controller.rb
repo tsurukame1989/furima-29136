@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  # ログアウト状態のユーザーをログインページへ遷移させるメソッド
+  before_action :authenticate_user!
+  
   # ＠itemに特定のIDのパラメーターを代入するメソッド（同じ記述を減らすために定義）
   before_action :set_item, only: [:index, :create]
 
