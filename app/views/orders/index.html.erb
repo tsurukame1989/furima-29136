@@ -30,8 +30,12 @@
       </p>
     </div>
     <%# /支払額の表示 %>
+    
+    <%# エラーメッセージ表示の部分テンプレート %>
+    <%= render "shared/error_messages" %>
+    <%# /エラーメッセージ表示の部分テンプレート %>
 
-    <%= form_with model: @order_shipping, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with(model: @order_shipping, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true) do |f| %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
