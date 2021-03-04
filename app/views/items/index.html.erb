@@ -136,19 +136,15 @@
             <%= link_to item_path(item.id), method: :get do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
-
-                <%# Order機能の実装後コメントアウト解除 %>
+                
                 <%# 売れた商品のid(Orderモデルのitem_id)とItemモデルのidが一致した場合、Sold Outを表示 %>
-                <%# <% @orders.each do |order| %>
-                  <%# <% if order.item_id == item.id %>
-                    <%# <div class='sold-out'> %>
-                    <%# <span>Sold Out!!</span> %>
-                    <%# </div> %>
-                  <%# <% end %>
-                <%# <% end %>
+                <% if item.order.id.present? %>
+                  <div class='sold-out'>
+                    <span>Sold Out!!</span>
+                  </div>
+                <% end %>
                 <%# //売れた商品のid(Orderモデルのitem_id)とItemモデルのidが一致した場合、Sold Outを表示 %>
-                <%# //Order機能の実装後コメントアウト解除 %>
-
+                
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>

@@ -9,15 +9,13 @@
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
 
-      <%# Order機能の実装後コメントアウト解除 %>
       <%# itemモデルとアソシエーションを組んだOrderモデルのidが存在した場合（商品が売れた場合）trueを返す条件式 %>
-      <%# <% if item.order.id.present? %>
-        <%# <div class='sold-out'> %>
-          <%# <span>Sold Out!!</span> %>
-        <%# </div> %>
-      <%# <% end %>
+      <% if @item.order.id.present? %>
+        <div class='sold-out'>
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
       <%# //itemモデルとアソシエーションを組んだOrderモデルのidが存在した場合（商品が売れた場合）trueを返す条件式 %>
-      <%# //Order機能の実装後コメントアウト解除 %>
 
     </div>
     <div class="item-price-box">
@@ -32,24 +30,23 @@
     <%# ログインしている場合true %>
     <% if user_signed_in? %>
 
-      <%# ログインしているユーザーidが出品者のidと一致すればtrue %>
-      <% if current_user.id == @item.user.id %>
-
+      <%# ＠itemと紐づいたOderモデルのidが存在する（商品が売れている）場合true => ボタン表示なし %>
+      <% if @item.order.id.present? %>
+        
+      <%# 商品が売れておらず、ログインしているユーザーidが出品者のidと一致すればtrue => 編集 or 削除ボタン表示 %>
+      <% elsif current_user.id == @item.user.id %>
         <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", item_path, method: :delete, class:"item-destroy" %>
 
-      <%# Order機能実装後、46行目のelsifの条件文に置換 %>
-      <% else %>
-      
-      <%# ログインしているユーザーが出品者でなく、Orderモデルにidが存在しない（商品が売れていない）場合true %>
-      <%# elsif !@item.order.id.present? %>
-        <%= link_to "購入画面に進む", item_orders_path(@item.id),class:"item-red-btn" %>
-
+      <%# 商品が売れておらず、ログインしているユーザーが出品者でない場合true => 購入画面へのボタン表示 %>
+      <% elsif %>
+      <%= link_to "購入画面に進む", item_orders_path(@item.id),class:"item-red-btn" %>
       <% end %>
     <% end %>
-      <div class="item-explain-box">
-        <span><%= @item.info %></span>
+
+    <div class="item-explain-box">
+      <span><%= @item.info %></span>
       </div>
       <table class="detail-table">
         <tbody>
@@ -80,17 +77,17 @@
         </tbody>
       </table>
       <div class="option">
-        <div class="favorite-btn">
-          <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-          <span>お気に入り 0</span>
-        </div>
-        <div class="report-btn">
-          <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
-          <span>不適切な商品の通報</span>
-        </div>
+      <div class="favorite-btn">
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り 0</span>
+      </div>
+      <div class="report-btn">
+        <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
+        <span>不適切な商品の通報</span>
       </div>
   </div>
-  <%# /商品の概要 %>
+</div>
+<%# /商品の概要 %>
   <div class="comment-box">
     <form>
       <textarea class="comment-text"></textarea>
